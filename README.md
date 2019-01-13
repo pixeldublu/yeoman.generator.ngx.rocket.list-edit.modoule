@@ -1,0 +1,2 @@
+# pxl.yo.generator.angular
+
