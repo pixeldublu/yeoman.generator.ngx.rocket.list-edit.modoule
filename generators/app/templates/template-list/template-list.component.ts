@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { <%= mainTitle %>Service } from '@app/core/services/<%= secondaryTitle %>.service';
+import { <%= mainTitle %>Service } from '@app/core/services/api/<%= secondaryTitle %>.service';
 import { <%= mainModel %> } from '@app/core/models/<%= secondaryModel %>';
 import { finalize } from 'rxjs/operators';
 

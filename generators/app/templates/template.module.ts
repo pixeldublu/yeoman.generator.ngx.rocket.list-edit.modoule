@@ -11,7 +11,7 @@ import { <%= mainTitle %>RoutingModule } from './<%= secondaryTitle %>-routing.m
 import { <%= mainTitle %>Component } from './<%= secondaryTitle %>.component';
 import { <%= mainTitle %>ListComponent } from './<%= secondaryTitle %>-list/<%= secondaryTitle %>-list.component';
 import { <%= mainTitle %>ManageComponent } from './<%= secondaryTitle %>-manage/<%= secondaryTitle %>-manage.component';
-import { <%= mainTitle %>Service } from '../core/services/<%= secondaryTitle %>.service';
+import { <%= mainTitle %>Service } from '../core/services/api/<%= secondaryTitle %>.service';
 
 
 @NgModule({
