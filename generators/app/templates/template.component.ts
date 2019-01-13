@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
         <router-outlet></router-outlet>
   </div>
   `,
+  styleUrls: ['./<%= secondaryTitle %>.component.scss']
 })
 export class <%= mainTitle %>Component {
 

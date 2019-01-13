@@ -20,8 +20,7 @@ export class <%= mainTitle %>ManageComponent implements OnInit {
   id: string;
 
   <%= secondaryModel %>: <%= mainModel %> = {
-    name: '',
-    image: ''
+
   };
 
   environment = environment;
