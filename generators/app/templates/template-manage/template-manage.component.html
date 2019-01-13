@@ -1,0 +1,51 @@
+<form #form="ngForm" class="app-form">
+  <mat-card>
+    <mat-card-title>
+      {{'Details' | translate}}
+    </mat-card-title>
+    <mat-form-field class="input-full-width">
+      <input placeholder="{{'Name' | translate}}" matInput [ngModel]="<%= secondaryModel %>?.name" [value]="<%= secondaryModel %>?.name"
+        (ngModelChange)="<%= secondaryModel %>.name = $event" name="name" id="name" class="form-control" required>
+    </mat-form-field>
+
+  </mat-card>
+
+  <mat-card *ngIf="<%= secondaryModel %>.image || !isNew">
+    <mat-card-title>
+      {{'Image' | translate}}
+    </mat-card-title>
+    <div class="imagebox" *ngIf="<%= secondaryModel %>.image">
+
+        <mat-card class="imagecard <%= secondaryModel %>image">
+          <img mat-card-image [src]="environment.serverHost + '/uploads/<%= secondaryTitle %>/' + <%= secondaryModel %>.image" class="imagecard">
+        </mat-card>
+
+    </div>
+
+    <div class="fileupload" *ngIf="!isNew">
+      <material-file-upload (complete)="onFileComplete($event)" (uploading)="onUploadStarted($event)" (error)="onUploadError($event)"
+        [target]="'/api/<%= secondaryTitle %>/image/' + id" [multiple]="false" [disable]="isLoading" [text]="'Upload Image' | translate"></material-file-upload>
+    </div>
+
+
+  </mat-card>
+
+  <mat-card>
+    <mat-toolbar class="whitebg">
+
+      <span class="center">
+        <button type="submit" mat-raised-button color="accent" (click)="save<%= mainModel %>(form.valid)" [disabled]="form.invalid || isLoading">{{(isNew
+          ? 'Create' : 'Update') | translate}}</button>
+
+        <button *ngIf="!isNew" type="submit" mat-raised-button color="warn" (click)="delete<%= mainModel %>()" [disabled]="isLoading">{{'Delete'
+          | translate}}</button>
+      </span>
+    </mat-toolbar>
+  </mat-card>
+</form>
+
+
+<mat-toolbar color="primary">
+  <span class="center"><button [disabled]="isLoading" [routerLink]="['/<%= secondaryTitle %>/']" mat-raised-button translate>
+      {{'Back to <%= mainTitle %>' | translate}}</button> </span>
+</mat-toolbar>

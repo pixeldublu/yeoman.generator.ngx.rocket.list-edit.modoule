@@ -1,0 +1,123 @@
+import { Component, OnInit } from '@angular/core';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { <%= mainTitle %>Service } from '@app/core/services/<%= secondaryTitle %>.service';
+import { <%= mainModel %> } from '@app/core/models/<%= secondaryModel %>'
+import { Router, ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
+import { extract } from '@app/core';
+
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from '@env/environment';
+
+@Component({
+  selector: 'app-<%= secondaryTitle %>-manage',
+  templateUrl: './<%= secondaryTitle %>-manage.component.html'
+})
+export class <%= mainTitle %>ManageComponent implements OnInit {
+
+  isLoading: boolean;
+  isNew = true;
+  id: string;
+
+  <%= secondaryModel %>: <%= mainModel %> = {
+    name: '',
+    image: ''
+  };
+
+  environment = environment;
+
+  constructor(private <%= secondaryTitle %>Service: <%= mainTitle %>Service,
+              private router: Router,
+              private route: ActivatedRoute,
+              public snackBar: MatSnackBar,
+              private translateService: TranslateService
+) {}
+
+  loadData(id: string) {
+    this.isLoading = true;
+    this.<%= secondaryTitle %>Service.api<%= mainTitle %>IdGet(id, 'body')
+      .subscribe((value: <%= mainModel %>) => {
+        this.setData(value[0]);
+      });
+  }
+
+  setData(<%= secondaryModel %>: <%= mainModel %>) {
+    this.isLoading = false;
+    this.<%= secondaryModel %> = <%= secondaryModel %>;
+    this.isNew = false;
+    this.id = this.<%= secondaryModel %>.id.toString();
+
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      if (params && params.id) {
+        this.loadData(params.id);
+      }
+    });
+  }
+
+  onFileComplete(data: any) {
+    this.isLoading = false;
+    this.setData(data);
+      this.translateService
+      .get('Image uploaded')
+      .subscribe(result => this.snackBar.open(result, '', {duration: 500, verticalPosition: 'top'}));
+  }
+
+  onUploadStarted(data: any) {
+    this.isLoading = true;
+  }
+
+  onUploadError(error: string) {
+    this.isLoading = false;
+    this.snackBar.open(error, '', {duration: 2000, verticalPosition: 'top'});
+  }
+
+  save<%= mainModel %>(valid: any) {
+    this.isLoading = true;
+    if (this.isNew) {
+      this.<%= secondaryTitle %>Service
+        .api<%= mainTitle %>Post(this.<%= secondaryModel %>)
+        .subscribe((data) => {
+          this.isLoading = false;
+          setTimeout(() => {
+            this.translateService
+            .get('<%= mainModel %> created')
+            .subscribe(result => this.snackBar.open(result, '', {duration: 500, verticalPosition: 'top'}));
+            this.router.navigate(['/<%= secondaryTitle %>/manage/' + data.id]);
+          }, 100);
+        });
+    } else {
+      this.<%= secondaryTitle %>Service
+        .api<%= mainTitle %>IdPost(this.id, this.<%= secondaryModel %>)
+        .subscribe((data: any) => {
+          this.isLoading = false;
+          setTimeout(() => {
+          this.translateService
+          .get('<%= mainModel %> updated')
+          .subscribe(result => this.snackBar.open(result, '', {duration: 500, verticalPosition: 'top'}));
+          }, 100);
+        });
+    }
+  };
+
+  delete<%= mainModel %>() {
+    this.isLoading = true;
+    this.<%= secondaryTitle %>Service
+    .api<%= mainTitle %>IdDelete(this.id)
+    .subscribe((data: any) => {
+      this.isLoading = false;
+      setTimeout(() => {
+      this.translateService
+      .get('<%= mainModel %> deleted')
+      .subscribe(result => this.snackBar.open(result, '', {duration: 500, verticalPosition: 'top'}));
+        this.router.navigate(['/<%= secondaryTitle %>']);
+      }, 100);
+    });
+  }
+
+
+
+
+}
