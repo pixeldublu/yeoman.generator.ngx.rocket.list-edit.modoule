@@ -12,8 +12,9 @@ module.exports = class extends Generator {
     this.log(
       yosay(
         `Welcome to the lovely ${chalk.red(
-          "generator-scaffool-angular"
-        )} generator!`
+          "generator-pxl-angular"
+        )} generator!
+        Use this only from the main angular folder!`
       )
     );
 
@@ -36,11 +37,6 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    // // this.props.name
-    // this.fs.copy(
-    //   this.templatePath('dummyfile.txt'),
-    //   this.destinationPath('dummyfile.txt')
-    // );
     const parent = this;
     glob(this.templatePath() + "/**/*", function (err, files) {
       files.forEach(file => {
@@ -55,7 +51,7 @@ module.exports = class extends Generator {
         if (/\./gi.test(originalFileName)) {
           parent.fs.copyTpl(
             parent.templatePath(originalFileName),
-            parent.destinationPath('' + newFileName), {
+            parent.destinationPath('src/app/' + String(parent.props.name).toLowerCase() + '/' + newFileName), {
               mainTitle: parent.props.name,
               secondaryTitle: String(parent.props.name).toLowerCase(),
               mainModel: parent.props.model,
