@@ -1,7 +1,7 @@
 {
-  "name": "generator-pxl-angular",
+  "name": "ngx-rocket-module-generator",
   "version": "0.0.0",
-  "description": "Generate complete angular 7 module",
+  "description": "Generate complete ngx-rocket angular module",
   "homepage": "",
   "author": {
     "name": "pixeldublu",
@@ -70,6 +70,6 @@
     "pretest": "eslint .",
     "test": "jest"
   },
-  "repository": "pixeldublu/generator-pxl-angular",
+  "repository": "https://github.com/pixeldublu/yo-ngx-rocket-module-generator",
   "license": "MIT"
 }

@@ -12,7 +12,7 @@ module.exports = class extends Generator {
     this.log(
       yosay(
         `Welcome to the lovely ${chalk.red(
-          "generator-pxl-angular"
+          "yo-ngx-rocket-module-generator"
         )} generator!
         Use this only from the main angular folder!`
       )
@@ -21,7 +21,7 @@ module.exports = class extends Generator {
     const prompts = [{
         type: "input",
         name: "name",
-        message: "pxl.angular module name ? Start with uppercase. Ex: Cars"
+        message: "yo-ngx-rocket-module-generator module name ? Start with uppercase. Ex: Cars"
       },
       {
         type: "input",
