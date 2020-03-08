@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { <%= mainTitle %>Service } from '@app/core/services/api/<%= secondaryTitle %>.service';
-import { <%= mainModel %> } from '@app/core/models/<%= secondaryModel %>'
+import { <%= mainModel %> } from '@app/core/models/<%= secondaryModel %>.model'
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { extract } from '@app/core';

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { <%= mainTitle %>Service } from '@app/core/services/api/<%= secondaryTitle %>.service';
-import { <%= mainModel %> } from '@app/core/models/<%= secondaryModel %>';
+import { <%= mainModel %> } from '@app/core/models/<%= secondaryModel %>.model';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -14,7 +14,7 @@ export class <%= mainTitle %>ListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'actions'];
   dataSource = new MatTableDataSource();
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   constructor(private <%= secondaryTitle %>Service: <%= mainTitle %>Service) {}
 
