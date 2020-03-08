@@ -1,7 +1,7 @@
 {
-  "name": "ngx-rocket-module-generator",
+  "name": "generator-ngx-rocket-list-edit-module",
   "version": "0.0.0",
-  "description": "Generate complete ngx-rocket angular module",
+  "description": "Generates ngx rocket style module with list and manage edit view",
   "homepage": "",
   "author": {
     "name": "pixeldublu",
@@ -19,22 +19,21 @@
   "devDependencies": {
     "yeoman-test": "^1.7.0",
     "yeoman-assert": "^3.1.0",
-    "eslint": "^5.9.0",
-    "prettier": "^1.15.2",
-    "husky": "^1.2.0",
-    "lint-staged": "^8.1.0",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-plugin-prettier": "^3.0.0",
-    "eslint-config-xo": "^0.25.0",
-    "jest": "^23.5.0"
+    "eslint": "^6.6.0",
+    "prettier": "^1.19.1",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.3",
+    "eslint-config-prettier": "^6.6.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-config-xo": "^0.27.2",
+    "jest": "^24.8.0"
   },
   "engines": {
     "npm": ">= 4.0.0"
   },
   "dependencies": {
-    "chalk": "^2.1.0",
-    "glob": "^7.1.3",
     "yeoman-generator": "^2.0.1",
+    "chalk": "^2.1.0",
     "yosay": "^2.0.1"
   },
   "jest": {
@@ -49,6 +48,11 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +74,6 @@
     "pretest": "eslint .",
     "test": "jest"
   },
-  "repository": "https://github.com/pixeldublu/yo-ngx-rocket-module-generator",
+  "repository": "pixeldublu/generator-ngx-rocket-list-edit-module",
   "license": "MIT"
 }

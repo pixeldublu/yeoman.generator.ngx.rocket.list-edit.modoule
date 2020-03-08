@@ -10,26 +10,6 @@
 
   </mat-card>
 
-  <mat-card *ngIf="<%= secondaryModel %>.image || !isNew">
-    <mat-card-title>
-      {{'Image' | translate}}
-    </mat-card-title>
-    <div class="imagebox" *ngIf="<%= secondaryModel %>.image">
-
-        <mat-card class="imagecard <%= secondaryModel %>image">
-          <img mat-card-image [src]="environment.serverHost + '/uploads/<%= secondaryTitle %>/' + <%= secondaryModel %>.image" class="imagecard">
-        </mat-card>
-
-    </div>
-
-    <div class="fileupload" *ngIf="!isNew">
-      <material-file-upload (complete)="onFileComplete($event)" (uploading)="onUploadStarted($event)" (error)="onUploadError($event)"
-        [target]="'/api/<%= secondaryTitle %>/image/' + id" [multiple]="false" [disable]="isLoading" [text]="'Upload Image' | translate"></material-file-upload>
-    </div>
-
-
-  </mat-card>
-
   <mat-card>
     <mat-toolbar class="whitebg">
 

@@ -1,27 +1,24 @@
 "use strict";
 const Generator = require("yeoman-generator");
 const chalk = require("chalk");
-const glob = require("glob");
 const yosay = require("yosay");
+const glob = require("glob");
 
 module.exports = class extends Generator {
-  async prompting() {
-    let answers;
-
-    // Have Yeoman greet the user.
-    this.log(
-      yosay(
-        `Welcome to the lovely ${chalk.red(
-          "yo-ngx-rocket-module-generator"
-        )} generator!
-        Use this only from the main angular folder!`
-      )
+  prompting() {
+    yosay(
+      `Welcome to the lovely ${chalk.red(
+        "yo-ngx-rocket-module-generator"
+      )} generator!
+      Use this only from the main angular folder!`
     );
 
-    const prompts = [{
+    const prompts = [
+      {
         type: "input",
         name: "name",
-        message: "yo-ngx-rocket-module-generator module name ? Start with uppercase. Ex: Cars"
+        message:
+          "yo-ngx-rocket-module-generator module name ? Start with uppercase. Ex: Cars"
       },
       {
         type: "input",
@@ -38,33 +35,42 @@ module.exports = class extends Generator {
 
   writing() {
     const parent = this;
-    glob(this.templatePath() + "/**/*", function (err, files) {
-      files.forEach(file => {
-        const originalFileName = file.replace(
-          parent.templatePath().replace(/\\/gi, "/") + "/",
-          ""
-        );
-        const newFileName = originalFileName.replace(
-          /template/gi,
-          String(parent.props.name).toLowerCase()
-        );
-        if (/\./gi.test(originalFileName)) {
-          parent.fs.copyTpl(
-            parent.templatePath(originalFileName),
-            parent.destinationPath('src/app/' + String(parent.props.name).toLowerCase() + '/' + newFileName), {
-              mainTitle: parent.props.name,
-              secondaryTitle: String(parent.props.name).toLowerCase(),
-              mainModel: parent.props.model,
-              secondaryModel: String(parent.props.model).toLowerCase()
-            }
+    glob(this.templatePath() + "/**/*", function(err, files) {
+      if (err) {
+        console.error(err);
+      } else {
+        files.forEach(file => {
+          const originalFileName = file.replace(
+            parent.templatePath().replace(/\\/gi, "/") + "/",
+            ""
           );
-        }
-
-      });
+          const newFileName = originalFileName.replace(
+            /template/gi,
+            String(parent.props.name).toLowerCase()
+          );
+          if (/\./gi.test(originalFileName)) {
+            parent.fs.copyTpl(
+              parent.templatePath(originalFileName),
+              parent.destinationPath(
+                "src/app/" +
+                  String(parent.props.name).toLowerCase() +
+                  "/" +
+                  newFileName
+              ),
+              {
+                mainTitle: parent.props.name,
+                secondaryTitle: String(parent.props.name).toLowerCase(),
+                mainModel: parent.props.model,
+                secondaryModel: String(parent.props.model).toLowerCase()
+              }
+            );
+          }
+        });
+      }
     });
   }
 
   install() {
-    // this.installDependencies();
+    // This.installDependencies();
   }
 };
