@@ -15,7 +15,7 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpEvent } from '@angular/commo
 
 import { Observable } from 'rxjs';
 
-import { <%= mainModel %>  } from '@app/core/models/<%= secondaryModel %>';
+import { <%= mainModel %>  } from '@app/core/models/<%= secondaryModel %>.model';
 
 import { Configuration } from '../configuration';
 
