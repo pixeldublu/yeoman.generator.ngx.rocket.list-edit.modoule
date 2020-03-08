@@ -56,22 +56,6 @@ export class <%= mainTitle %>ManageComponent implements OnInit {
     });
   }
 
-  onFileComplete(data: any) {
-    this.isLoading = false;
-    this.setData(data);
-      this.translateService
-      .get('Image uploaded')
-      .subscribe(result => this.snackBar.open(result, '', {duration: 500, verticalPosition: 'top'}));
-  }
-
-  onUploadStarted(data: any) {
-    this.isLoading = true;
-  }
-
-  onUploadError(error: string) {
-    this.isLoading = false;
-    this.snackBar.open(error, '', {duration: 2000, verticalPosition: 'top'});
-  }
 
   save<%= mainModel %>(valid: any) {
     this.isLoading = true;
