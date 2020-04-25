@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { SharedModule } from '@app/shared';
+import { SharedModule } from '@shared';
 import { FormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@app/material.module';
@@ -11,7 +11,7 @@ import { <%= mainTitle %>RoutingModule } from './<%= secondaryTitle %>-routing.m
 import { <%= mainTitle %>Component } from './<%= secondaryTitle %>.component';
 import { <%= mainTitle %>ListComponent } from './<%= secondaryTitle %>-list/<%= secondaryTitle %>-list.component';
 import { <%= mainTitle %>ManageComponent } from './<%= secondaryTitle %>-manage/<%= secondaryTitle %>-manage.component';
-import { <%= mainTitle %>Service } from '@app/core/services/api/<%= secondaryTitle %>.service';
+import { <%= mainTitle %>Service } from './services/<%= secondaryTitle %>.service';
 
 
 @NgModule({

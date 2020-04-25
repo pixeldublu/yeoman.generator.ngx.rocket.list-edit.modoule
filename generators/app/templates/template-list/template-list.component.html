@@ -7,6 +7,11 @@
 
 
   <div [hidden]="isLoading">
+
+    <mat-form-field class="input-full-width">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{'Search' | translate}}">
+    </mat-form-field>
+
     <table mat-table [dataSource]="dataSource" style="width:100%;">
 
       <!-- Id Column -->

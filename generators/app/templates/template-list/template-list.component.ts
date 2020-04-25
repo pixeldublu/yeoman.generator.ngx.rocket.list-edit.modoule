@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { <%= mainTitle %>Service } from '@app/core/services/api/<%= secondaryTitle %>.service';
-import { <%= mainModel %> } from '@app/core/models/<%= secondaryModel %>.model';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { <%= mainTitle %>Service } from '../services/<%= secondaryTitle %>.service';
+import { <%= mainModel %> } from '../models/<%= secondaryModel %>.model';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -14,7 +15,7 @@ export class <%= mainTitle %>ListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'actions'];
   dataSource = new MatTableDataSource();
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(private <%= secondaryTitle %>Service: <%= mainTitle %>Service) {}
 
@@ -26,5 +27,9 @@ export class <%= mainTitle %>ListComponent implements OnInit {
       .pipe(finalize(() => { this.isLoading = false; }))
       .subscribe((value: <%= mainModel %>) => {
         this.dataSource.data = <Object[]> value; });
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

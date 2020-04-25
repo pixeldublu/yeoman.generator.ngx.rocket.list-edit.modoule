@@ -15,9 +15,9 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpEvent } from '@angular/commo
 
 import { Observable } from 'rxjs';
 
-import { <%= mainModel %>  } from '@app/core/models/<%= secondaryModel %>.model';
+import { <%= mainModel %>  } from '../models/<%= secondaryModel %>.model';
 
-import { Configuration } from '../configuration';
+import { Configuration } from '@core/configuration';
 
 @Injectable()
 export class <%= mainTitle %>Service {

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { extract } from '@app/core';
+import { extract } from '@app/i18n';
 import { <%= mainTitle %>Component } from './<%= secondaryTitle %>.component';
 import { <%= mainTitle %>ListComponent } from '@app/<%= secondaryTitle %>/<%= secondaryTitle %>-list/<%= secondaryTitle %>-list.component';
 import { <%= mainTitle %>ManageComponent } from '@app/<%= secondaryTitle %>/<%= secondaryTitle %>-manage/<%= secondaryTitle %>-manage.component';

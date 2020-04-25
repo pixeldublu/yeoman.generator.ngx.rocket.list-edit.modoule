@@ -44,10 +44,10 @@ module.exports = class extends Generator {
             parent.templatePath().replace(/\\/gi, "/") + "/",
             ""
           );
-          const newFileName = originalFileName.replace(
-            /template/gi,
-            String(parent.props.name).toLowerCase()
-          );
+          let newFileName = originalFileName
+            .replace(/modeltemplate/gi, String(parent.props.model))
+            .toLowerCase()
+            .replace(/template/gi, String(parent.props.name).toLowerCase());
           if (/\./gi.test(originalFileName)) {
             parent.fs.copyTpl(
               parent.templatePath(originalFileName),

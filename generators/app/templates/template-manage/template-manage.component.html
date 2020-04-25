@@ -26,6 +26,14 @@
 
 
 <mat-toolbar color="primary">
-  <span class="center"><button [disabled]="isLoading" [routerLink]="['/<%= secondaryTitle %>/']" mat-raised-button translate>
-      {{'Back to <%= mainTitle %>' | translate}}</button> </span>
+
+      <span class="center">
+        <button [disabled]="isLoading" [routerLink]="['/<%= secondaryTitle %>/']" mat-raised-button translate>
+          {{'Back to <%= mainTitle %>' | translate}}
+        </button>
+        <button [disabled]="isLoading" *ngIf="!isNew" [routerLink]="['/<%= secondaryTitle %>/manage/']" mat-raised-button translate>
+          {{ 'Add Another' | translate }}
+        </button>
+      </span>
+
 </mat-toolbar>
