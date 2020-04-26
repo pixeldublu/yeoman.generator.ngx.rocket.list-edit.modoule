@@ -7,7 +7,8 @@ import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-<%= secondaryTitle %>-list',
-  templateUrl: './<%= secondaryTitle %>-list.component.html'
+  templateUrl: './<%= secondaryTitle %>-list.component.html',
+  styleUrls: ['./<%= secondaryTitle %>-list.component.scss']
 })
 export class <%= mainTitle %>ListComponent implements OnInit {
 

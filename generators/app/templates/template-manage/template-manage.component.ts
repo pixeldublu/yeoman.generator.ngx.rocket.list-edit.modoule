@@ -7,6 +7,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '@env/environment';
 
+import { Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { ConfirmationDialog } from '@shared/dialogs/confirmation/confirmation-dialog.component';
+
 @Component({
   selector: 'app-<%= secondaryTitle %>-manage',
   templateUrl: './<%= secondaryTitle %>-manage.component.html'
@@ -17,9 +21,10 @@ export class <%= mainTitle %>ManageComponent implements OnInit {
   isNew = true;
   id: string;
 
-  <%= secondaryModel %>: <%= mainModel %> = {
 
-  };
+  <%= secondaryModel %>Form = this.fb.group({
+    name: ['', Validators.required],
+  });
 
   environment = environment;
 
@@ -27,7 +32,9 @@ export class <%= mainTitle %>ManageComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               public snackBar: MatSnackBar,
-              private translateService: TranslateService
+              private dialog: MatDialog,
+              private translateService: TranslateService,
+              private fb: FormBuilder
 ) {}
 
   loadData(id: string) {
@@ -40,9 +47,9 @@ export class <%= mainTitle %>ManageComponent implements OnInit {
 
   setData(<%= secondaryModel %>: <%= mainModel %>) {
     this.isLoading = false;
-    this.<%= secondaryModel %> = <%= secondaryModel %>;
+    this.<%= secondaryModel %>Form.patchValue(<%= secondaryModel %>);
     this.isNew = false;
-    this.id = this.<%= secondaryModel %>.id.toString();
+    this.id = <%= secondaryModel %>.id.toString();
 
   }
 
@@ -55,11 +62,11 @@ export class <%= mainTitle %>ManageComponent implements OnInit {
   }
 
 
-  save<%= mainModel %>(valid: any) {
+  save<%= mainModel %>() {
     this.isLoading = true;
     if (this.isNew) {
       this.<%= secondaryTitle %>Service
-        .api<%= mainTitle %>Post(this.<%= secondaryModel %>)
+        .api<%= mainTitle %>Post(this.<%= secondaryModel %>Form.value)
         .subscribe((data) => {
           this.isLoading = false;
           setTimeout(() => {
@@ -71,7 +78,7 @@ export class <%= mainTitle %>ManageComponent implements OnInit {
         });
     } else {
       this.<%= secondaryTitle %>Service
-        .api<%= mainTitle %>IdPost(this.id, this.<%= secondaryModel %>)
+        .api<%= mainTitle %>IdPost(this.id, this.<%= secondaryModel %>Form.value)
         .subscribe((data: any) => {
           this.isLoading = false;
           setTimeout(() => {
@@ -83,21 +90,40 @@ export class <%= mainTitle %>ManageComponent implements OnInit {
     }
   };
 
-  delete<%= mainModel %>() {
-    this.isLoading = true;
-    this.<%= secondaryTitle %>Service
-    .api<%= mainTitle %>IdDelete(this.id)
-    .subscribe((data: any) => {
-      this.isLoading = false;
-      setTimeout(() => {
-      this.translateService
-      .get('<%= mainModel %> deleted')
-      .subscribe(result => this.snackBar.open(result, '', {duration: 500, verticalPosition: 'top'}));
-        this.router.navigate(['/<%= secondaryTitle %>']);
-      }, 100);
-    });
-  }
 
+
+
+
+  delete<%= mainModel %>() {
+
+    const dialogRef = this.dialog.open(ConfirmationDialog,{
+      data:{
+        message: 'Are you sure want to delete?',
+        buttonText: {
+          ok: 'Yes',
+          cancel: 'No'
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.isLoading = true;
+        this.<%= secondaryTitle %>Service
+        .api<%= mainTitle %>IdDelete(this.id)
+        .subscribe((data: any) => {
+          this.isLoading = false;
+          setTimeout(() => {
+          this.translateService
+          .get('<%= mainModel %> deleted')
+          .subscribe(result => this.snackBar.open(result, '', {duration: 500, verticalPosition: 'top'}));
+            this.router.navigate(['/<%= secondaryTitle %>']);
+          }, 100);
+        });
+      }
+    });
+
+  }
 
 
 

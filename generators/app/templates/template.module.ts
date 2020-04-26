@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from '@shared';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@app/material.module';
 import { ShellModule } from '@app/shell/shell.module';
@@ -20,7 +20,7 @@ import { <%= mainTitle %>Service } from './services/<%= secondaryTitle %>.servic
     TranslateModule,
     FlexLayoutModule,
     SharedModule,
-    FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     ShellModule,
     <%= mainTitle %>RoutingModule

@@ -1,23 +1,32 @@
-<form #form="ngForm" class="app-form">
+<mat-toolbar color="primary">
+
+  <span class="center">
+    <button [disabled]="isLoading" [routerLink]="['/<%= secondaryTitle %>/']" mat-raised-button translate>
+      {{'Back to <%= mainTitle %>' | translate}}
+    </button>
+    <button [disabled]="isLoading" *ngIf="!isNew" [routerLink]="['/<%= secondaryTitle %>/manage/']" mat-raised-button translate>
+      {{ 'Add Another' | translate }}
+    </button>
+  </span>
+
+</mat-toolbar>
+<form [formGroup]="<%= secondaryModel %>Form" (ngSubmit)="save<%= mainModel %>()" class="app-form">
   <mat-card>
     <mat-card-title>
       {{'Details' | translate}}
     </mat-card-title>
     <mat-form-field class="input-full-width">
-      <input placeholder="{{'Name' | translate}}" matInput [ngModel]="<%= secondaryModel %>?.name" [value]="<%= secondaryModel %>?.name"
-        (ngModelChange)="<%= secondaryModel %>.name = $event" name="name" id="name" class="form-control" required>
+        <input placeholder="{{'Name' | translate}}" matInput formControlName="name" name="name" id="name" class="form-control">
     </mat-form-field>
 
-  </mat-card>
 
-  <mat-card>
     <mat-toolbar class="whitebg">
 
       <span class="center">
-        <button type="submit" mat-raised-button color="accent" (click)="save<%= mainModel %>(form.valid)" [disabled]="form.invalid || isLoading">{{(isNew
-          ? 'Create' : 'Update') | translate}}</button>
+        <button type="submit" mat-raised-button color="accent" [disabled]="<%= secondaryModel %>Form.invalid || isLoading">{{(isNew
+            ? 'Create' : 'Update') | translate}}</button>
 
-        <button *ngIf="!isNew" type="submit" mat-raised-button color="warn" (click)="delete<%= mainModel %>()" [disabled]="isLoading">{{'Delete'
+        <button *ngIf="!isNew" type="button" mat-raised-button color="warn" (click)="delete<%= mainModel %>()" [disabled]="isLoading">{{'Delete'
           | translate}}</button>
       </span>
     </mat-toolbar>
@@ -25,15 +34,4 @@
 </form>
 
 
-<mat-toolbar color="primary">
 
-      <span class="center">
-        <button [disabled]="isLoading" [routerLink]="['/<%= secondaryTitle %>/']" mat-raised-button translate>
-          {{'Back to <%= mainTitle %>' | translate}}
-        </button>
-        <button [disabled]="isLoading" *ngIf="!isNew" [routerLink]="['/<%= secondaryTitle %>/manage/']" mat-raised-button translate>
-          {{ 'Add Another' | translate }}
-        </button>
-      </span>
-
-</mat-toolbar>
