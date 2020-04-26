@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '@env/environment';
+import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationDialog } from '@shared/dialogs/confirmation/confirmation-dialog.component';
 import { <%= mainTitle %>Service } from '../services/<%= secondaryTitle %>.service';
 import { <%= mainModel %> } from '../models/<%= secondaryModel %>.model'
-import { Router, ActivatedRoute } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { TranslateService } from '@ngx-translate/core';
-import { environment } from '@env/environment';
 
-import { Validators } from '@angular/forms';
-import { FormBuilder } from '@angular/forms';
-import { ConfirmationDialog } from '@shared/dialogs/confirmation/confirmation-dialog.component';
 
 @Component({
   selector: 'app-<%= secondaryTitle %>-manage',
