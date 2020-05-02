@@ -56,7 +56,7 @@ export class <%= mainTitle %>Service {
    * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
    * @param reportProgress flag to report request and response progress.
    */
-  public api<%= mainTitle %>Get(observe?: 'body', reportProgress?: boolean): Observable<<%= mainModel %>>;
+  public api<%= mainTitle %>Get(observe?: 'body', reportProgress?: boolean): Observable<<%= mainModel %>[]>;
   public api<%= mainTitle %>Get(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<<%= mainModel %>>>;
   public api<%= mainTitle %>Get(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<<%= mainModel %>>>;
   public api<%= mainTitle %>Get(observe: any = 'body', reportProgress: boolean = false): Observable<any> {

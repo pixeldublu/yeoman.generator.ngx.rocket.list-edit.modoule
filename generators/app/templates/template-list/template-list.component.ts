@@ -14,7 +14,7 @@ export class <%= mainTitle %>ListComponent implements OnInit {
 
   isLoading: boolean;
   displayedColumns: string[] = ['id', 'name', 'actions'];
-  dataSource = new MatTableDataSource();
+  dataSource: MatTableDataSource<<%= mainModel %>> = new MatTableDataSource([]);
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -26,8 +26,8 @@ export class <%= mainTitle %>ListComponent implements OnInit {
     this.isLoading = true;
     this.<%= secondaryTitle %>Service.api<%= mainTitle %>Get()
       .pipe(finalize(() => { this.isLoading = false; }))
-      .subscribe((value: <%= mainModel %>) => {
-        this.dataSource.data = <Object[]> value; });
+      .subscribe((value: <%= mainModel %>[]) => {
+        this.dataSource.data = value; });
   }
 
   applyFilter(filterValue: string) {
